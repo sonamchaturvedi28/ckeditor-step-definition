@@ -1,0 +1,19 @@
+/**
+  * @Given /^I fill in "([^"]*)" field with following:$/
+  */
+public function fillCKEditor($label, PyStringNode $value) {
+  // Search for TextEditor based on the label.
+  $editor = $this->getSession()->getPage()->findField($label);
+  if (empty($editor)) {
+    throw new ExpectationException('Could not find WYSIWYG with locator: ' . $label, $this->getSession());
+  }
+
+  // Find id of CKEditor Instance.
+  $fieldId = $editor->getAttribute('id');
+  if (empty($fieldId)) {
+    throw new Exception('Could not find an id for field with locator: ' . $label);
+  }
+
+  // Add value in CKEditor.
+  $this->getSession()->executeScript("CKEditor.instances[\"$fieldId\"].setData(\"$string\");");
+}  
