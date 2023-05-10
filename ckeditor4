@@ -1,5 +1,6 @@
 /**
-  * @Given /^I fill in "([^"]*)" field with following:$/
+  * @When I fill in :arg1 field with following:
+  * @throws Exception
   */
 public function fillCKEditor($label, PyStringNode $value) {
   // Search for TextEditor based on the label.
@@ -15,5 +16,5 @@ public function fillCKEditor($label, PyStringNode $value) {
   }
 
   // Add value in CKEditor.
-  $this->getSession()->executeScript("CKEditor.instances[\"$fieldId\"].setData(\"$string\");");
+  $this->getSession()->executeScript("CKEditor.instances[\"$fieldId\"].setData(\"$value\");");
 }  
